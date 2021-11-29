@@ -44,7 +44,7 @@
 								<td th:text="${document.title}"></td>
 								<td><a th:href="@{/document/{id}(id=${document.documentnode})}"
                                     class="btn btn-primary"><i class="far fa-address-card"></i></a></td>
-								<td><a th:href="@{/transactionhistory/edit/{id}(id=${document.documentnode})}"
+								<td><a th:href="@{/document/edit/{id}(id=${document.documentnode})}"
                                     class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
                                 <td><a th:href="@{/document/delete/{id}(id=${document.documentnode})}"
                                     class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>

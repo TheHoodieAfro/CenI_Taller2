@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.taller.model.Document;
+import com.taller.model.Product;
 import com.taller.model.Transactionhistory;
 import com.taller.model.info;
 import com.taller.service.implementations.DocumentServiceImp;
@@ -73,7 +74,33 @@ public class DocumentController {
 		}
 		
 		//------------------------------------------------------- Edit -------------------------------------------------------
+		@GetMapping("/document/edit/{id}")
+		public String editDocument(@PathVariable("id") Integer id, Model model) {
+			Document p = ds.findById(id).get();
+			if (p == null)
+				throw new IllegalArgumentException("Invalid Document Id:" + id);
+			
+			model.addAttribute("document", p);
+			return "operator/editDocument";
+		}
 		
+		@PostMapping("/document/edit/{id}")
+		public String updateDocument(@PathVariable("id") Integer id, @Validated(info.class) Document document, BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
+			if (action.equals("Cancel")) {
+				return "redirect:/document";
+			}
+			if(bindingResult.hasErrors()) {
+				Document p = ds.findById(id).get();
+				if (p == null)
+					throw new IllegalArgumentException("Invalid Document Id:" + id);
+				
+				model.addAttribute("document", p);
+				return "operator/editDocument";
+			}
+			document.setDocumentnode(id);
+			ds.update(document);
+			return "redirect:/document";
+		}
 		
 		//------------------------------------------------------- Delete -------------------------------------------------------
 		@GetMapping("/document/delete/{id}")

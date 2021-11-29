@@ -44,5 +44,16 @@ public class DocumentServiceImp implements DocumentService {
 	public void delete(Document document) {
 		dr.deleteById(document.getDocumentnode());
 	}
+
+	public void update(Document dd) {
+		Document d = dr.findById(dd.getDocumentnode()).get();
+		
+		d.setFileextension(dd.getFileextension());
+		d.setFilename(dd.getFilename());
+		d.setModifieddate(dd.getModifieddate());
+		d.setTitle(dd.getTitle());
+		
+		dr.save(d);
+	}
 	
 }
