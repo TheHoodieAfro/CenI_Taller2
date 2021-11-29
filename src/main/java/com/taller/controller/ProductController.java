@@ -13,11 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.taller.model.Product;
-import com.taller.model.Productcategory;
-import com.taller.model.Productsubcategory;
-import com.taller.model.Productvendor;
-import com.taller.model.Unitmeasure;
-import com.taller.model.Vendor;
 import com.taller.model.info;
 import com.taller.service.implementations.ProductServiceImp;
 import com.taller.service.implementations.ProductcategoryServiceImp;
@@ -56,17 +51,15 @@ public class ProductController {
 	    }
 		
 		//------------------------------------------------------- Consult -------------------------------------------------------
-		/*@GetMapping("/product/{id}")
-	    public String consultProductsByProductvendor(@PathVariable("id") Integer id, Model model) {
-			model.addAttribute("products", ps.find());
-	        return "admin/products";
-	    }*/
+		@GetMapping("/product/{id}")
+	    public String consultProductsByDocument(@PathVariable("id") Integer id, Model model) {
+			return "redirect:/product";
+	    }
 		
 		//------------------------------------------------------- Save -------------------------------------------------------
 		@GetMapping("/product/add")
 		public String addProduct(Model model) {
 			model.addAttribute("product", new Product());
-			model.addAttribute("productcategories", pcs.findAll());
 			model.addAttribute("productsubcategories", pscs.findAll());
 			model.addAttribute("unitmeasures", ums.findAll());
 			return "admin/addProduct";

@@ -42,7 +42,6 @@ public class DocumentServiceImp implements DocumentService {
 	}
 
 	public void delete(Document document) {
-		// TODO Auto-generated method stub
 		dr.deleteById(document.getDocumentnode());
 	}
 	

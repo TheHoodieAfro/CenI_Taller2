@@ -20,16 +20,31 @@
 		<h2 class="mb-5">Crear documento</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/addDocument}" th:object="${document}"
+				<form action="#" th:action="@{/document/add}" th:object="${document}"
 					method="post">
 					<div class="row">
 					
+						<div class="form-group col-md-6">
+							<label for="fileextension" class="col-form-label">fileextension</label> <input
+								type="text" th:field="*{fileextension}" class="form-control" id="fileextension"
+								placeholder="fileextension"> 
+								<span
+								th:if="${#fields.hasErrors('fileextension')}" th:errors="*{fileextension}"
+								class="text-danger"></span>
+						</div>
 						<div class="form-group col-md-6">
 							<label for="filename" class="col-form-label">filename</label> <input
 								type="text" th:field="*{filename}" class="form-control" id="filename"
 								placeholder="filename"> 
 								<span
-								th:if="${#fields.hasErrors('name')}" th:errors="*{filename}"
+								th:if="${#fields.hasErrors('filename')}" th:errors="*{filename}"
+								class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="modifieddate" class="col-form-label">modifieddate</label> <input
+								type="date" th:field="*{modifieddate}" class="form-control" id="modifieddate"
+								placeholder="modifieddate"> <span
+								th:if="${#fields.hasErrors('modifieddate')}" th:errors="*{modifieddate}"
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">

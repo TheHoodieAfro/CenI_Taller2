@@ -26,11 +26,11 @@
 						<thead>
 							<tr>
 								<th>documentnode</th>
-								<th>document</th>
 								<th>fileextension</th>
 								<th>filename</th>
 								<th>modifieddate</th>
 								<th>title</th>
+								<th>Visit products</th>
 								<th>edit</th>
 								<th>remove</th>
 							</tr>
@@ -38,14 +38,15 @@
 						<tbody>
 							<tr th:each="document : ${documents}">
 								<td th:text="${document.documentnode}"></td>
-								<td th:text="${document.document}"></td>
 								<td th:text="${document.fileextension}"></td>
 								<td th:text="${document.filename}"></td>
 								<td th:text="${document.modifieddate.toString()}"></td>
 								<td th:text="${document.title}"></td>
-								<td><a th:href="@{/transactionhistory/edit/{id}(id=${th.transactionid})}"
+								<td><a th:href="@{/document/{id}(id=${document.documentnode})}"
+                                    class="btn btn-primary"><i class="far fa-address-card"></i></a></td>
+								<td><a th:href="@{/transactionhistory/edit/{id}(id=${document.documentnode})}"
                                     class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-                                <td><a th:href="@{/transactionhistory/delete/{id}(id=${th.transactionid})}"
+                                <td><a th:href="@{/document/delete/{id}(id=${document.documentnode})}"
                                     class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>
 						</tbody>

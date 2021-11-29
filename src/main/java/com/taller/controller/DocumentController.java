@@ -44,26 +44,27 @@ public class DocumentController {
 	    }
 		
 		//------------------------------------------------------- Consult -------------------------------------------------------
-		
+		@GetMapping("/document/{id}")
+		public String productsByDocuments(Model model) {
+			return "redirect:/document";
+		}
 		
 		//------------------------------------------------------- Save -------------------------------------------------------
 		@GetMapping("/document/add")
 		public String addDocument(Model model) {
 			model.addAttribute("document", new Document());
-			model.addAttribute("products", ps.findAll());
 			return "operator/addDocument";
 		}
 		
 		@PostMapping("/document/add")
-		public String saveDocument(@Validated Document document, BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
-			if (!action.equals("Cancel")) {
+		public String saveDocument(@Validated(info.class) Document document, BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
+			if (action.equals("Cancel")) {
 				return "redirect:/document";
 				
 			}
 			
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("document", new Document());
-				model.addAttribute("products", ps.findAll());
 				return "operator/addDocument";
 			}
 			
@@ -79,7 +80,7 @@ public class DocumentController {
 		public String deleteDocument(@PathVariable("id") Integer id, Model model) {
 			Optional<Document> document = ds.findById(id);
 			if (document.isEmpty())
-				throw new IllegalArgumentException("Invalid product Id:" + id);
+				throw new IllegalArgumentException("Invalid document Id:" + id);
 			
 			
 			ds.delete(document.get());
