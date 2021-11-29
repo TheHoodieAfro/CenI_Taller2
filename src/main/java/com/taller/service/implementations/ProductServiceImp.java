@@ -1,5 +1,6 @@
 package com.taller.service.implementations;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import com.taller.model.Product;
 import com.taller.model.Productsubcategory;
 import com.taller.repository.interfaces.ProductRepository;
 import com.taller.repository.interfaces.ProductsubcategoryRepository;
+import com.taller.repository.interfaces.ProductvendorRepository;
 import com.taller.repository.interfaces.UnitmeasureRepository;
 import com.taller.service.interfaces.ProductService;
 
@@ -21,11 +23,14 @@ public class ProductServiceImp implements ProductService {
 	
 	private ProductsubcategoryRepository pscr;
 	
+	private ProductvendorRepository pvr;
+	
 	@Autowired
-	public ProductServiceImp(ProductRepository pr, UnitmeasureRepository umr, ProductsubcategoryRepository pscr) {
+	public ProductServiceImp(ProductRepository pr, UnitmeasureRepository umr, ProductsubcategoryRepository pscr, ProductvendorRepository pvr) {
 		this.pr = pr;
 		this.umr = umr;
 		this.pscr = pscr;
+		this.pvr = pvr;
 	}
 	
 	public Iterable<Product> findAll() {
@@ -35,6 +40,19 @@ public class ProductServiceImp implements ProductService {
 	public Optional<Product> findById(Integer id) {
 		return pr.findById(id);
 	}
+	/*
+	public Iterable<Product> findAllById(Integer id) {
+		ArrayList<Product> p = (ArrayList<Product>) pr.findAll();
+		Integer pv = pvr.findById(id).get().getId();
+		ArrayList<Product> toReturn = new ArrayList<Product>();
+		
+		for (Product pp : p) {
+			if(pp.getBusinessentity().getName().equals(name)) {
+				toReturn.add(pp);
+			}
+		}
+		return toReturn;
+	}*/
 	
 	@Override
 	public Product save(Product prod) {

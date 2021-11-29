@@ -1,4 +1,4 @@
-package com.taller.dbauthentication;
+package com.taller.auth;
 
 
 import org.springframework.context.annotation.Bean;
@@ -13,6 +13,11 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	@Bean
+	public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+	    return new UrlAuthenticationSuccessHandler();
+	}
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
@@ -21,26 +26,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.withUser("op").password("{noop}op").roles("OPERATOR");
 		
 	}
-	
-	@Bean
-	public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
-	    return new MySimpleUrlAuthenticationSuccessHandler();
-	}
 
 	@Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http
-	        .authorizeRequests()
+        http.authorizeRequests()
 	        .antMatchers("/").permitAll()
 	        .antMatchers("/admin/**").hasRole("ADMIN")
 	        .antMatchers("/operator/**").hasRole("OPERATOR")
 	        .antMatchers("/h2-console/**").permitAll()
 	        .and()
-            .formLogin()
-                .loginProcessingUrl("/login")
-                .successHandler(myAuthenticationSuccessHandler());
+            .formLogin().loginProcessingUrl("/login").successHandler(myAuthenticationSuccessHandler());
         
         http.csrf().disable();
+        
         http.headers().frameOptions().disable();     
     }
 

@@ -19,8 +19,8 @@ import com.taller.repository.interfaces.VendorRepository;
 
 @SpringBootApplication
 @EnableJpaRepositories("com.taller.repository.interfaces")
-@EntityScan(basePackages = {"com.taller.dbauthentication","com.taller.model"})
-@ComponentScan(basePackages = {"com.taller.dbauthentication","com.taller.repository.interfaces","com.taller.service.implementations","com.taller.controller"})
+@EntityScan(basePackages = {"com.taller.auth","com.taller.model"})
+@ComponentScan(basePackages = {"com.taller.auth","com.taller.repository.interfaces","com.taller.service.implementations","com.taller.controller"})
 public class Taller1Application {
 
 	public static void main(String[] args) {

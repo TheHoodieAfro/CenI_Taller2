@@ -33,6 +33,7 @@
 								<th>productcategory</th>
 								<th>unitmeasure1</th>
 								<th>unitmeasure2</th>
+								<th>Visit Transactions</th>
 								<th>edit</th>
 								<th>remove</th>
 							</tr>
@@ -47,6 +48,8 @@
 								<td th:text="${product.productsubcategory.productcategory.name}"></td>
 								<td th:text="${product.unitmeasure1.name}"></td>
 								<td th:text="${product.unitmeasure2.name}"></td>
+								<td><a th:href="@{/Transactionhistory/{id}(id=${product.productid})}"
+                                    class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/product/edit/{id}(id=${product.productid})}"
                                     class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
                                 <td><a th:href="@{/product/delete/{id}(id=${product.productid})}"

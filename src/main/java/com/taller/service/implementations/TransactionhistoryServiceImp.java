@@ -1,5 +1,7 @@
 package com.taller.service.implementations;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,20 @@ public class TransactionhistoryServiceImp implements TransactionhistoryService {
 		mth.setProduct(pr.findById(transactionhistory.getProduct().getProductid()).get());
 		
 		thr.save(mth);
+	}
+
+	public Object findByProducts(Integer productId) {
+		Iterable<Transactionhistory> all = thr.findAll();
+			
+		List<Transactionhistory> cond = new ArrayList<Transactionhistory>();
+		for(Transactionhistory th : all) {
+			if(th.getProduct().getProductid() == productId) {
+				cond.add(th);
+			}
+		}
+		
+		Iterable<Transactionhistory> xd = cond;
+		return xd;
 	}
 	
 }
