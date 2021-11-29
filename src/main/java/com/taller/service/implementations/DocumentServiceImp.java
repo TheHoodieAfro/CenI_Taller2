@@ -1,5 +1,6 @@
 package com.taller.service.implementations;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class DocumentServiceImp implements DocumentService {
 		
 		d.setFileextension(dd.getFileextension());
 		d.setFilename(dd.getFilename());
-		d.setModifieddate(dd.getModifieddate());
+		d.setModifieddate(LocalDate.now());
 		d.setTitle(dd.getTitle());
 		
 		dr.save(d);
