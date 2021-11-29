@@ -1,6 +1,8 @@
 package com.taller.service.implementations;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.taller.model.Document;
 import com.taller.model.Product;
+import com.taller.model.Productdocument;
 import com.taller.repository.interfaces.DocumentRepository;
 import com.taller.repository.interfaces.ProductRepository;
 import com.taller.service.interfaces.DocumentService;
@@ -55,6 +58,18 @@ public class DocumentServiceImp implements DocumentService {
 		d.setTitle(dd.getTitle());
 		
 		dr.save(d);
+	}
+
+	public Iterable<Product> findProductsByDocument(Integer id) {
+		List<Productdocument> pds = dr.findById(id).get().getProductdocuments();
+		
+		List<Product> ps = new ArrayList<Product>();
+		for(Productdocument pd : pds) {
+			ps.add(pd.getProduct());
+		}
+		
+		Iterable<Product> ret = ps;
+		return ret;
 	}
 	
 }

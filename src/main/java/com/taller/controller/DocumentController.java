@@ -46,8 +46,9 @@ public class DocumentController {
 		
 		//------------------------------------------------------- Consult -------------------------------------------------------
 		@GetMapping("/document/{id}")
-		public String productsByDocuments(Model model) {
-			return "redirect:/document";
+		public String productsByDocuments(@PathVariable("id") Integer id, Model model) {
+			model.addAttribute("products", ds.findProductsByDocument(id));
+			return "operator/productsByDocument";
 		}
 		
 		//------------------------------------------------------- Save -------------------------------------------------------

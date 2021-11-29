@@ -11,12 +11,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.taller.model.Document;
 import com.taller.model.Product;
 import com.taller.model.Productcategory;
 import com.taller.model.Productsubcategory;
 import com.taller.model.Transactionhistory;
 import com.taller.model.Unitmeasure;
 import com.taller.model.Vendor;
+import com.taller.repository.interfaces.DocumentRepository;
 import com.taller.repository.interfaces.ProductRepository;
 import com.taller.repository.interfaces.ProductcategoryRepository;
 import com.taller.repository.interfaces.ProductsubcategoryRepository;
@@ -35,7 +37,7 @@ public class Taller1Application {
 	}
 	
 	@Bean
-	public CommandLineRunner add(TransactionhistoryRepository thr, ProductcategoryRepository pcr, ProductsubcategoryRepository pscr, UnitmeasureRepository umr, VendorRepository vr, ProductRepository pr) {
+	public CommandLineRunner add(DocumentRepository dr, TransactionhistoryRepository thr, ProductcategoryRepository pcr, ProductsubcategoryRepository pscr, UnitmeasureRepository umr, VendorRepository vr, ProductRepository pr) {
 		return (args) -> {
 			Productcategory pc1 = new Productcategory();
 			pc1.setName("Comida");
@@ -142,6 +144,19 @@ public class Taller1Application {
 			th4.setModifieddate(LocalDate.of(2021, 11, 10));
 			th4.setProduct(p2);
 			thr.save(th4);
+			
+			Document d1 = new Document();
+			d1.setFileextension("docx");
+			d1.setFilename("salud2");
+			d1.setModifieddate(LocalDate.of(2021, 11, 10));
+			d1.setTitle("titulazo");
+			dr.save(d1);
+			Document d2 = new Document();
+			d2.setFileextension("xlxs");
+			d2.setFilename("salud3");
+			d2.setModifieddate(LocalDate.of(2021, 11, 10));
+			d2.setTitle("titulaze");
+			dr.save(d2);
 		};
 	}
 
