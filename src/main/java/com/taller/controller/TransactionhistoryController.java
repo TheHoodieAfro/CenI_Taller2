@@ -50,6 +50,12 @@ public class TransactionhistoryController {
 	        return "operator/transactionhistoriesByProduct";
 	    }
 		
+		@GetMapping("/Transactionhistory/{id}")
+	    public String consultTransactionhistoryByProduct2(@PathVariable("id") Integer id, Model model) {
+			model.addAttribute("transactionhistories", ths.findByProducts(id));
+	        return "operator/transactionhistoriesByProduct";
+	    }
+		
 		//------------------------------------------------------- Save -------------------------------------------------------
 		@GetMapping("/transactionhistory/add")
 		public String addTransactionHistory(Model model) {

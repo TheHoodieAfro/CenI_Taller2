@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.taller.model.Product;
 import com.taller.model.Transactionhistory;
 import com.taller.repository.interfaces.ProductRepository;
 import com.taller.repository.interfaces.TransactionhistoryRepository;
@@ -31,7 +32,12 @@ public class TransactionhistoryServiceImp implements TransactionhistoryService {
 	
 	@Override
 	public Transactionhistory save(Transactionhistory doc) {
-		doc.setProduct(pr.findById(doc.getProduct().getProductid()).get());
+		Product p = pr.findById(doc.getProduct().getProductid()).get();
+		
+		doc.setProduct(p);
+		p.addTransactionhistory(doc);
+		
+		pr.save(p);
 		return thr.save(doc);
 	}
 
@@ -63,7 +69,7 @@ public class TransactionhistoryServiceImp implements TransactionhistoryService {
 		thr.save(mth);
 	}
 
-	public Object findByProducts(Integer productId) {
+	public Iterable<Transactionhistory> findByProducts(Integer productId) {
 		Iterable<Transactionhistory> all = thr.findAll();
 			
 		List<Transactionhistory> cond = new ArrayList<Transactionhistory>();
@@ -72,6 +78,14 @@ public class TransactionhistoryServiceImp implements TransactionhistoryService {
 				cond.add(th);
 			}
 		}
+		
+		Iterable<Transactionhistory> xd = cond;
+		return xd;
+	}
+	
+	public Iterable<Transactionhistory> findByProducts2(Integer productId) {
+		Product p = pr.findById(productId).get();
+		List<Transactionhistory> cond = p.getTransactionhistories();
 		
 		Iterable<Transactionhistory> xd = cond;
 		return xd;

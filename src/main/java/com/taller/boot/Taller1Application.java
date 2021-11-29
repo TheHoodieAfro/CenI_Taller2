@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.taller.model.Product;
 import com.taller.model.Productcategory;
 import com.taller.model.Productsubcategory;
 import com.taller.model.Unitmeasure;
@@ -73,6 +74,35 @@ public class Taller1Application {
 			Vendor v2 = new Vendor();
 			v2.setName("dotor uribito");
 			vr.save(v2);
+			
+			Product p1 = new Product();
+			p1.setName("Piña");
+			p1.setDaystomanufacture(360);
+			p1.setProductnumber("123");
+			p1.setProductsubcategory(psc1);
+			p1.setUnitmeasure1(um3);
+			p1.setUnitmeasure1(um1);
+			Product p4 = new Product();
+			p4.setName("anvorgesa");
+			p4.setDaystomanufacture(1);
+			p4.setProductnumber("937");
+			p4.setProductsubcategory(psc2);
+			p4.setUnitmeasure1(um3);
+			p4.setUnitmeasure1(um2);
+			Product p2 = new Product();
+			p2.setName("perico");
+			p2.setDaystomanufacture(30);
+			p2.setProductnumber("666");
+			p2.setProductsubcategory(psc3);
+			p2.setUnitmeasure1(um4);
+			p2.setUnitmeasure1(um2);
+			Product p3 = new Product();
+			p3.setName("guana");
+			p3.setDaystomanufacture(90);
+			p3.setProductnumber("420");
+			p3.setProductsubcategory(psc4);
+			p3.setUnitmeasure1(um4);
+			p3.setUnitmeasure1(um1);
 		};
 	}
 
