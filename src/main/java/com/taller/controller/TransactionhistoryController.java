@@ -44,15 +44,15 @@ public class TransactionhistoryController {
 	    }
 		
 		//------------------------------------------------------- Consult -------------------------------------------------------
-		@GetMapping("/Transactionhistory/{id}")
+		/*@GetMapping("/Transactionhistory/{id}")
 	    public String consultTransactionhistoryByProduct(@PathVariable("id") Integer id, Model model) {
 			model.addAttribute("transactionhistories", ths.findByProducts(id));
 	        return "operator/transactionhistoriesByProduct";
-	    }
+	    }*/
 		
 		@GetMapping("/Transactionhistory/{id}")
 	    public String consultTransactionhistoryByProduct2(@PathVariable("id") Integer id, Model model) {
-			model.addAttribute("transactionhistories", ths.findByProducts(id));
+			model.addAttribute("transactionhistories", ths.findByProducts2(id));
 	        return "operator/transactionhistoriesByProduct";
 	    }
 		
