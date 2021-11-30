@@ -52,9 +52,10 @@ public class ProductController {
 		
 		//------------------------------------------------------- Consult -------------------------------------------------------
 		@GetMapping("/product/{id}")
-	    public String consultProductsByDocument(@PathVariable("id") Integer id, Model model) {
-			return "redirect:/product";
-	    }
+		public String documentsByProduct(@PathVariable("id") Integer id, Model model) {
+			model.addAttribute("documents", ps.findDocumentsByProduct(id));
+			return "admin/documentsByProduct";
+		}
 		
 		//------------------------------------------------------- Save -------------------------------------------------------
 		@GetMapping("/product/add")

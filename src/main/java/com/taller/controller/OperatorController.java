@@ -72,7 +72,6 @@ public class OperatorController {
 				}
 				
 				pds.save(productdocument);
-				System.out.println("paso por aqui");
 				return "redirect:/document";
 			}
 			

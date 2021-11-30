@@ -1,12 +1,15 @@
 package com.taller.service.implementations;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.taller.model.Document;
 import com.taller.model.Product;
+import com.taller.model.Productdocument;
 import com.taller.model.Productsubcategory;
 import com.taller.repository.interfaces.ProductRepository;
 import com.taller.repository.interfaces.ProductsubcategoryRepository;
@@ -83,6 +86,18 @@ public class ProductServiceImp implements ProductService {
 		mp.setUnitmeasure2(umr.findById(p.getUnitmeasure2().getUnitmeasurecode()).get());
 		
 		pr.save(mp);
+	}
+
+	public Iterable<Document> findDocumentsByProduct(Integer id) {
+		List<Productdocument> pds = pr.findById(id).get().getProductdocuments();
+		
+		List<Document> ds = new ArrayList<Document>();
+		for(Productdocument pd : pds) {
+			ds.add(pd.getDocument());
+		}
+		
+		Iterable<Document> ret = ds;
+		return ret;
 	}
 
 }
